@@ -13,6 +13,7 @@ namespace labaoaip9
         public int y;
         public int w;
         public int h;
+        public string name;
         abstract public void Draw();
         abstract public void MoveTo(int x, int y);
         public void DeleteF(Figure figure, bool flag = true)

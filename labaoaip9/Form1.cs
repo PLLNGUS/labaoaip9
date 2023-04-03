@@ -15,7 +15,7 @@ namespace labaoaip9
     {
         Rectangle rectagle;
         Square square;
-        
+        Figure figure;
        
         ShapeContainer shapeContainer;
         Init init;
@@ -31,7 +31,7 @@ namespace labaoaip9
         {
             if (op.symbolOperator == 'R')
             {
-                this.figure = new Rectagle
+                this.figure = new Rectangle
                 (Convert.ToInt32
                 (Convert.ToString(operands.Pop().value)), Convert.ToInt32
                 (Convert.ToString(operands.Pop().value)), Convert.ToInt32
@@ -44,7 +44,9 @@ namespace labaoaip9
                 op.operatorMethod();
             }
 
-            private bool IsNotOperation(char item)
+
+        }
+        private bool IsNotOperation(char item)
         {
             if (!(item == 'R' || item == 'M' || item == 'E' || item == 'C' || item == 'S' || item == ',' || item == '(' || item == ')'))
             {
@@ -144,6 +146,15 @@ namespace labaoaip9
             }
 
         }
-            
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
     }
