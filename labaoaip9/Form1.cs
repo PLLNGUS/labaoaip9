@@ -69,27 +69,50 @@ namespace labaoaip9
                             flag = false;
                             continue;
                         }
-                        else if ((textBox1.Text[i + 1] == ','
-                        || textBox1.Text[i + 1] == ')')
-                        && !(Char.IsDigit(textBox1.Text[i - 1])))
-                        {
-                            this.operands.Push(new Operand(ConvertCharToInt
-                            (textBox1.Text[i])));
-                            continue;
-                        }
-                        else if (textBox1.Text[i] == 'R')
-                        {
-                            if (this.operators.Count == 0)
-                            {
-                                this.operators.Push(OperatorContainer.FindOperator
-                                (textBox1.Text[i]));
-                            }
-                        }
 
                     }
 
-
+                }
+                else if ((textBox1.Text[i + 1] == ','
+                       || textBox1.Text[i + 1] == ')')
+                       && !(Char.IsDigit(textBox1.Text[i - 1])))
+                {
+                    this.operands.Push(new Operand(ConvertCharToInt
+                    (textBox1.Text[i])));
+                    continue;
+                }
+                else if (textBox1.Text[i] == 'R')
+                {
+                    if (this.operators.Count == 0)
+                    {
+                        this.operators.Push(OperatorContainer.FindOperator
+                        (textBox1.Text[i]));
+                    }
+                }
+                else if (textBox1.Text[i] == '(')
+                {
+                    this.operators.Push(OperatorContainer.FindOperator
+                    (textBox1.Text[i]));
+                }
+                else if (textBox1.Text[i] == ')')
+                {
+                    do
+                    {
+                        if (operators.Peek().symbolOperator == '(')
+                        {
+                            operators.Pop();
+                            break;
+                        }
+                        if (operators.Count == 0)
+                        {
+                            break;
+                        }
+                    }
+                    while (operators.Peek().symbolOperator != '(');
                 }
             }
+
+        }
+            
         }
     }
