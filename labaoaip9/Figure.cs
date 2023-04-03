@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace labaoaip9
 {
-    internal class Figure
+    abstract public class Figure
     {
         public int x;
         public int y;
