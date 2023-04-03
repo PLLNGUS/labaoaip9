@@ -13,6 +13,12 @@ namespace labaoaip9
 {
     public partial class Form1 : Form
     {
+        Rectangle rectagle;
+        Square square;
+        
+       
+        ShapeContainer shapeContainer;
+        Init init;
 
         private Stack<Operator> operators = new Stack<Operator>();
         private Stack<Operand> operands = new Stack<Operand>();
