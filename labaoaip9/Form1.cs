@@ -70,33 +70,38 @@ namespace labaoaip9
 
         }
         bool flag;
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            for (int i = 0; i < textBox1.Text.Length; i++)
+            if (e.KeyCode == Keys.Enter)
             {
-                if (IsNotOperation(textBox1.Text[i]))
+                try
                 {
-                    if (!(Char.IsDigit(textBox1.Text[i])))
+                    //выполняется обработка входной строки
+                    for (int i = 0; i < textBox1.Text.Length; i++)
                     {
-                        this.operands.Push(new Operand(textBox1.Text[i]));
-                        continue;
-                    }
-                    else if (Char.IsDigit(textBox1.Text[i]))
-                    {
-                        if (Char.IsDigit(textBox1.Text[i + 1]))
+                        if (IsNotOperation(textBox1.Text[i]))
                         {
-                            if (flag)
+                            if (!(Char.IsDigit(textBox1.Text[i])))
                             {
                                 this.operands.Push(new Operand(textBox1.Text[i]));
+                                continue;
                             }
-                            this.operands.Push(new Operand(ConvertCharToInt(this.operands.Pop().value) * 10 + ConvertCharToInt(textBox1.Text[i + 1])));
-                            flag = false;
-                            continue;
+                            else if (Char.IsDigit(textBox1.Text[i]))
+                            {
+                                if (Char.IsDigit(textBox1.Text[i + 1]))
+                                {
+                                    if (flag)
+                                    {
+                                        this.operands.Push(new Operand(textBox1.Text[i]));
+                                    }
+                                    this.operands.Push(new Operand(ConvertCharToInt(this.operands.Pop().value) * 10 + ConvertCharToInt(textBox1.Text[i + 1])));
+                                    flag = false;
+                                    continue;
+                                }
+
+                            }
+
                         }
-
-                    }
-
-                }
                         else if ((textBox1.Text[i + 1] == ','
                                || textBox1.Text[i + 1] == ')')
                                && !(Char.IsDigit(textBox1.Text[i - 1])))
@@ -134,17 +139,25 @@ namespace labaoaip9
                             }
                             while (operators.Peek().symbolOperator != '(');
                         }
-                if (operators.Peek() != null)
-                {
-                    this.SelectingPerformingOperation(operators.Peek());
-                }
-                else
-                {
-                    MessageBox.Show("Введенной операции не существует");
-                }
+                        if (operators.Peek() != null)
+                        {
+                            this.SelectingPerformingOperation(operators.Peek());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Введенной операции не существует");
+                        }
 
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+
+                
             }
-
+            
+           
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
