@@ -21,8 +21,24 @@ namespace labaoaip9
             return Convert.ToInt32(bruh.ToString());
             
         }
-        
-        private bool IsNotOperation(char item)
+        private void SelectingPerformingOperation(Operator op)
+        {
+            if (op.symbolOperator == 'R')
+            {
+                this.figure = new Rectagle
+                (Convert.ToInt32
+                (Convert.ToString(operands.Pop().value)), Convert.ToInt32
+                (Convert.ToString(operands.Pop().value)), Convert.ToInt32
+                (Convert.ToString(operands.Pop().value)), Convert.ToInt32
+                (Convert.ToString(operands.Pop().value)), Convert.ToString
+                (operands.Pop().value));
+                op = new Operator(this.figure.Draw, 'R');
+                ShapeContainer.AddFigure(figure);
+                comboBox1.Items.Add(figure.name);
+                op.operatorMethod();
+            }
+
+            private bool IsNotOperation(char item)
         {
             if (!(item == 'R' || item == 'M' || item == 'E' || item == 'C' || item == 'S' || item == ',' || item == '(' || item == ')'))
             {
@@ -73,43 +89,52 @@ namespace labaoaip9
                     }
 
                 }
-                else if ((textBox1.Text[i + 1] == ','
-                       || textBox1.Text[i + 1] == ')')
-                       && !(Char.IsDigit(textBox1.Text[i - 1])))
-                {
-                    this.operands.Push(new Operand(ConvertCharToInt
-                    (textBox1.Text[i])));
-                    continue;
-                }
-                else if (textBox1.Text[i] == 'R')
-                {
-                    if (this.operators.Count == 0)
-                    {
-                        this.operators.Push(OperatorContainer.FindOperator
-                        (textBox1.Text[i]));
-                    }
-                }
-                else if (textBox1.Text[i] == '(')
-                {
-                    this.operators.Push(OperatorContainer.FindOperator
-                    (textBox1.Text[i]));
-                }
-                else if (textBox1.Text[i] == ')')
-                {
-                    do
-                    {
-                        if (operators.Peek().symbolOperator == '(')
+                        else if ((textBox1.Text[i + 1] == ','
+                               || textBox1.Text[i + 1] == ')')
+                               && !(Char.IsDigit(textBox1.Text[i - 1])))
                         {
-                            operators.Pop();
-                            break;
+                            this.operands.Push(new Operand(ConvertCharToInt
+                            (textBox1.Text[i])));
+                            continue;
                         }
-                        if (operators.Count == 0)
+                        else if (textBox1.Text[i] == 'R')
                         {
-                            break;
+                            if (this.operators.Count == 0)
+                            {
+                                this.operators.Push(OperatorContainer.FindOperator
+                                (textBox1.Text[i]));
+                            }
                         }
-                    }
-                    while (operators.Peek().symbolOperator != '(');
+                        else if (textBox1.Text[i] == '(')
+                        {
+                            this.operators.Push(OperatorContainer.FindOperator
+                            (textBox1.Text[i]));
+                        }
+                        else if (textBox1.Text[i] == ')')
+                        {
+                            do
+                            {
+                                if (operators.Peek().symbolOperator == '(')
+                                {
+                                    operators.Pop();
+                                    break;
+                                }
+                                if (operators.Count == 0)
+                                {
+                                    break;
+                                }
+                            }
+                            while (operators.Peek().symbolOperator != '(');
+                        }
+                if (operators.Peek() != null)
+                {
+                    this.SelectingPerformingOperation(operators.Peek());
                 }
+                else
+                {
+                    MessageBox.Show("Введенной операции не существует");
+                }
+
             }
 
         }
