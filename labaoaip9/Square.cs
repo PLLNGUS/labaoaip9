@@ -9,11 +9,8 @@ namespace labaoaip9
 {
     internal class Square : Rectangle
     {
-        public int x;
-        public int y;
-        public int w;
-        public int h;
-        public Square(int x, int y, int w, int h) { this.x = x; this.y = y; this.w = w; this.h = h; }
+       
+        public Square(int x, int y, int w, int h, string name) { this.x = x; this.y = y; this.w = w; this.h = h; this.name = name; }
         public Square() { this.x = 0; this.y = 0; this.w = 0; this.h = 0; }
 
         public override void Draw()

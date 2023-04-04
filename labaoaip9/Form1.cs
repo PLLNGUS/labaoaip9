@@ -48,7 +48,7 @@ namespace labaoaip9
         }
         private bool IsNotOperation(char item)
         {
-            if (!(item == 'R' || item == 'M' || item == 'E' || item == 'C' || item == 'S' || item == ',' || item == '(' || item == ')'))
+            if (!(item == 'S' || item == 'M' || item == 'D'  || item == ',' || item == '(' || item == ')'))
             {
                 return true;
             }
@@ -110,7 +110,7 @@ namespace labaoaip9
                             (textBox1.Text[i])));
                             continue;
                         }
-                        else if (textBox1.Text[i] == 'R')
+                        else if (textBox1.Text[i] == 'S')
                         {
                             if (this.operators.Count == 0)
                             {
