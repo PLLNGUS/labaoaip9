@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace labaoaip9
 {
-    internal class Square : Rectangle
+    internal class Square : Figure
     {
-       
-        public Square(int x, int y, int w, int h, string name) { this.x = x; this.y = y; this.w = w; this.h = h; this.name = name; }
-        public Square() { this.x = 0; this.y = 0; this.w = 0; this.h = 0; }
+
+        public Square(int h, int y, int x, string name) { this.h = h;  this.y = y; this.x = x; this.name = name; }/*this.x = x;*/ /*this.y = y; this.w = w; this.h = h;  */
+        public Square() { this.x = 0; this.y = 0; this.h = 0; this.h = 0; }
 
         public override void Draw()
         {
