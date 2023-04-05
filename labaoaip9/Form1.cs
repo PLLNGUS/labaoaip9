@@ -41,9 +41,40 @@ namespace labaoaip9
                 ShapeContainer.AddFigure(figure);
                 op.operatorMethod();
             }
-
+            if (op.symbolOperator == 'M')
+            {
+                int Y = Convert.ToInt32(Convert.ToString(operands.Pop().value));
+                int X = Convert.ToInt32(Convert.ToString(operands.Pop().value));
+                string Name = Convert.ToString(operands.Pop().value);
+                foreach(Figure figure in ShapeContainer.figureList) 
+                {
+                    if (figure.name == Name)
+                    {
+                      figure.MoveTo(X, Y);
+                    }
+                }
+                op = new Operator(this.figure.Draw, 'M');
+                ShapeContainer.AddFigure(figure);
+                op.operatorMethod();
+            }
+            if (op.symbolOperator == 'D')
+            {
+               
+                string Name = Convert.ToString(operands.Pop().value);
+                foreach (Figure figure in ShapeContainer.figureList)
+                {
+                    if (figure.name == Name)
+                    {
+                        figure.DeleteF(figure);
+                    }
+                }
+                op = new Operator(this.figure.Draw, 'M');
+                ShapeContainer.AddFigure(figure);
+                op.operatorMethod();
+            }
 
         }
+
         private bool IsNotOperation(char item)
         {
             if (!(item == 'S' || item == 'M' || item == 'D'  || item == ',' || item == '(' || item == ')'))
@@ -121,8 +152,7 @@ namespace labaoaip9
                                 }
 
                             }
-                            //////////////////////////////////////////////////////////////////////////////////////
-                            ///
+                           
                         }
                         else if (textBox1.Text[i] == 'S')
                         {
@@ -157,7 +187,7 @@ namespace labaoaip9
                                 throw new Exception();
                             }
                         }
-                        //////////////////////////////////////////////////////////////////////////////////////
+                        
                         else if (textBox1.Text[i] == '(')
                         {
                             this.operators.Push(OperatorContainer.FindOperator(textBox1.Text[i]));
@@ -180,7 +210,7 @@ namespace labaoaip9
                             }
                             while (operators.Peek().symbolOperator != '(');
                         }
-                        //////////////////////////////////////////////////////////////////////////////////////
+                        
 
 
                     }
@@ -189,17 +219,21 @@ namespace labaoaip9
                     {
                         this.SelectingPerformingOperation(operators.Peek());
                         richTextBox1.AppendText(textBox1.Text);
-                        richTextBox1.AppendText("-Команда выполнена успешно\n");
+                        richTextBox1.AppendText("Команда успешно выполнена\n");
                     }
                     else
                     {
                         MessageBox.Show("Введенной операции не существует");
                     }
+            }
+                catch (InvalidOperationException) {
+                richTextBox1.AppendText(textBox1.Text);
+                    richTextBox1.AppendText("Команда успешно выполнена\n");
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
 
-                
+
             }
             
            
@@ -211,6 +245,11 @@ namespace labaoaip9
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

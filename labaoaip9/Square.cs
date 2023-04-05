@@ -25,8 +25,8 @@ namespace labaoaip9
 
             if (!((this.x + x < 0 && this.y + y < 0)
             || (this.y + y < 0)
-            || (this.x + x > Init.pictureBox.Width && this.y + y <
-            0) || (this.x + this.w + x > Init.pictureBox.Width)
+            || (this.x + x > Init.pictureBox.Width && this.y + y < 0) 
+            || (this.x + this.h + x > Init.pictureBox.Width)
             || (this.x + x > Init.pictureBox.Width && this.y + y >
             Init.pictureBox.Height)
             || (this.y + this.h + y > Init.pictureBox.Height)
